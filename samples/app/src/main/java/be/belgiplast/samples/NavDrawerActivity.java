@@ -28,7 +28,7 @@ public class NavDrawerActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setItemHorizontalPadding(16);
         navigationView.setBackgroundResource(R.drawable.item_gradient);
-        //navigationView.setItemBackgroundResource(R.drawable.item_gradient2);
+        navigationView.setItemBackgroundResource(R.drawable.item_gradient2);
         TextView header = new TextView(this);
         header.setText("Blah");
         navigationView.addHeaderView(header);

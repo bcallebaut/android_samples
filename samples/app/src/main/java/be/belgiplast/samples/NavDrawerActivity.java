@@ -4,6 +4,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -33,7 +34,7 @@ public class NavDrawerActivity extends AppCompatActivity {
 
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setItemHorizontalPadding(16);
+//        navigationView.setItemHorizontalPadding(16);
         navigationView.setBackgroundResource(R.drawable.item_gradient);
         navigationView.setItemBackgroundResource(R.drawable.item_gradient2);
         TextView header = new TextView(this);
@@ -89,13 +90,15 @@ public class NavDrawerActivity extends AppCompatActivity {
         simpleAdapterViewFlipper.setAdapter(adapter); // set adapter for AdapterViewFlipper. Here adapter is object of custom adapter
 //        simpleAdapterViewFlipper.startFlipping();
 //        simpleAdapterViewFlipper.setFlipInterval(4000); // set 4 seconds for interval time
-
+/*
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabDots);
+*/
         findViewById(R.id.prev).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (simpleAdapterViewFlipper.getDisplayedChild() > 0) {
                     simpleAdapterViewFlipper.showPrevious();
-                    //pb.
+                    //tabLayout.set
                 }
 
             }
@@ -107,6 +110,9 @@ public class NavDrawerActivity extends AppCompatActivity {
                     simpleAdapterViewFlipper.showNext();
             }
         });
+
+
+
     }
 
     @Override

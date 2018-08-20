@@ -30,7 +30,7 @@ public class NavDrawerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nav_drawer);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
-        pb = findViewById(R.id.progress);
+        //pb = findViewById(R.id.progress);
 
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -98,6 +98,7 @@ public class NavDrawerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (simpleAdapterViewFlipper.getDisplayedChild() > 0) {
                     simpleAdapterViewFlipper.showPrevious();
+                    ((TextView)findViewById(R.id.progress)).setText(String.format("%i / %i",simpleAdapterViewFlipper.getDisplayedChild(),simpleAdapterViewFlipper.getCount()));
                     //tabLayout.set
                 }
 
@@ -106,8 +107,12 @@ public class NavDrawerActivity extends AppCompatActivity {
         findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (simpleAdapterViewFlipper.getCount()  > simpleAdapterViewFlipper.getDisplayedChild() + 1)
+                if (simpleAdapterViewFlipper.getCount()  > simpleAdapterViewFlipper.getDisplayedChild() + 1) {
                     simpleAdapterViewFlipper.showNext();
+                    try{
+                        ((TextView)findViewById(R.id.progress)).setText(String.format("%i / %i",simpleAdapterViewFlipper.getDisplayedChild(),simpleAdapterViewFlipper.getCount()));
+                    }catch (NullPointerException e){}
+                }
             }
         });
 

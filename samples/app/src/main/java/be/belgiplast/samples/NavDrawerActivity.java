@@ -23,6 +23,7 @@ public class NavDrawerActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private com.trncic.library.DottedProgressBar pb;
+    private AdapterViewFlipper simpleAdapterViewFlipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,8 @@ public class NavDrawerActivity extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setItemHorizontalPadding(16);
-        navigationView.setBackgroundResource(R.drawable.item_gradient);
-        navigationView.setItemBackgroundResource(R.drawable.item_gradient2);
+        //navigationView.setBackgroundResource(R.drawable.item_gradient);
+        //navigationView.setItemBackgroundResource(R.drawable.item_gradient2);
         TextView header = new TextView(this);
         header.setText("Blah");
         navigationView.addHeaderView(header);
@@ -67,7 +68,7 @@ public class NavDrawerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.baseline_menu_black_18dp);
+        actionbar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
         NavigationAdapter adapter = new NavigationAdapter(this);
         TextView v1 = new TextView(this);
@@ -86,7 +87,7 @@ public class NavDrawerActivity extends AppCompatActivity {
         v1.setText("page 3");
         adapter.add(v1);
 
-        final AdapterViewFlipper simpleAdapterViewFlipper = (AdapterViewFlipper) findViewById(R.id.simpleAdapterViewFlipper); // get the reference of AdapterViewFlipper
+        simpleAdapterViewFlipper = (AdapterViewFlipper) findViewById(R.id.simpleAdapterViewFlipper); // get the reference of AdapterViewFlipper
         simpleAdapterViewFlipper.setAdapter(adapter); // set adapter for AdapterViewFlipper. Here adapter is object of custom adapter
 //        simpleAdapterViewFlipper.startFlipping();
 //        simpleAdapterViewFlipper.setFlipInterval(4000); // set 4 seconds for interval time
@@ -98,7 +99,7 @@ public class NavDrawerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (simpleAdapterViewFlipper.getDisplayedChild() > 0) {
                     simpleAdapterViewFlipper.showPrevious();
-                    ((TextView)findViewById(R.id.progress)).setText(String.format("%i / %i",simpleAdapterViewFlipper.getDisplayedChild(),simpleAdapterViewFlipper.getCount()));
+                    ((TextView)findViewById(R.id.progress)).setText(String.format("%d / %d",simpleAdapterViewFlipper.getDisplayedChild() + 1 ,simpleAdapterViewFlipper.getCount()));
                     //tabLayout.set
                 }
 
@@ -110,7 +111,7 @@ public class NavDrawerActivity extends AppCompatActivity {
                 if (simpleAdapterViewFlipper.getCount()  > simpleAdapterViewFlipper.getDisplayedChild() + 1) {
                     simpleAdapterViewFlipper.showNext();
                     try{
-                        ((TextView)findViewById(R.id.progress)).setText(String.format("%i / %i",simpleAdapterViewFlipper.getDisplayedChild(),simpleAdapterViewFlipper.getCount()));
+                        ((TextView)findViewById(R.id.progress)).setText(String.format("%d / %d",simpleAdapterViewFlipper.getDisplayedChild() + 1 ,simpleAdapterViewFlipper.getCount()));
                     }catch (NullPointerException e){}
                 }
             }
@@ -118,6 +119,12 @@ public class NavDrawerActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((TextView)findViewById(R.id.progress)).setText(String.format("%d / %d",simpleAdapterViewFlipper.getDisplayedChild() + 1 ,simpleAdapterViewFlipper.getCount()));
     }
 
     @Override

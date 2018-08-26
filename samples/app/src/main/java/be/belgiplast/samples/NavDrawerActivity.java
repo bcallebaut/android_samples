@@ -70,6 +70,11 @@ public class NavDrawerActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
+        TabbedView tv = findViewById(R.id.tabbedView);
+        tv.add(R.layout.test1);
+        tv.add(R.layout.test2);
+        /*
+
         NavigationAdapter adapter = new NavigationAdapter(this);
         TextView v1 = new TextView(this);
         v1.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -91,9 +96,11 @@ public class NavDrawerActivity extends AppCompatActivity {
         simpleAdapterViewFlipper.setAdapter(adapter); // set adapter for AdapterViewFlipper. Here adapter is object of custom adapter
 //        simpleAdapterViewFlipper.startFlipping();
 //        simpleAdapterViewFlipper.setFlipInterval(4000); // set 4 seconds for interval time
+*/
 /*
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabDots);
 */
+/*
         findViewById(R.id.prev).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,7 +123,7 @@ public class NavDrawerActivity extends AppCompatActivity {
                 }
             }
         });
-
+*/
 
 
     }
@@ -124,7 +131,7 @@ public class NavDrawerActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ((TextView)findViewById(R.id.progress)).setText(String.format("%d / %d",simpleAdapterViewFlipper.getDisplayedChild() + 1 ,simpleAdapterViewFlipper.getCount()));
+//        ((TextView)findViewById(R.id.progress)).setText(String.format("%d / %d",simpleAdapterViewFlipper.getDisplayedChild() + 1 ,simpleAdapterViewFlipper.getCount()));
     }
 
     @Override

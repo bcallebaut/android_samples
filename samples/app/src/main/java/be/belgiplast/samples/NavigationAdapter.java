@@ -49,6 +49,7 @@ public class NavigationAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         view = views.get(position);
+        parent.addView(view);
         return view;
     }
 }

@@ -18,10 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/grass_full_bg"
-            android:theme="@style/ToolBarStyle"/>
+            />
+        <!--android:theme="@style/ToolBarStyle"-->
 
+        <be.belgiplast.samples.TabbedView
+            android:id="@+id/tabbedView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:background="@drawable/grass_main_full_bg"
+            tools:ignore="UnknownId"
+            >
 
-        <android.support.constraint.ConstraintLayout
+        </be.belgiplast.samples.TabbedView>
+        <!--android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
@@ -54,25 +64,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/simpleAdapterViewFlipper" />
 
-            <!--com.trncic.library.DottedProgressBar
-                android:id="@+id/progress"
-                android:layout_width="182dp"
-                android:layout_height="36dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="0dp"
-                android:padding="4dp"
-                app:activeDot="@drawable/active_dot"
-                app:dotSize="32dp"
-                app:inactiveDot="@drawable/inactive_dot"
-                app:jumpingSpeed="670"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/next"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/prev"
-                app:layout_constraintTop_toBottomOf="@+id/simpleAdapterViewFlipper"
-                app:spacing="15dp" /-->
             <TextView
                 android:id="@+id/progress"
                 android:layout_width="132dp"
@@ -101,9 +92,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 >
-                <!--   Add View’s Here -->
+
             </AdapterViewFlipper>
-        </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout-->
     </RelativeLayout>
 
 

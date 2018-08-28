@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -71,8 +72,8 @@ public class NavDrawerActivity extends AppCompatActivity {
         actionbar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
         TabbedView tv = findViewById(R.id.tabbedView);
-        tv.add(R.layout.test1);
-        tv.add(R.layout.test2);
+        tv.add("test1",R.layout.test1);
+        tv.add("test2",R.layout.test2);
         /*
 
         NavigationAdapter adapter = new NavigationAdapter(this);

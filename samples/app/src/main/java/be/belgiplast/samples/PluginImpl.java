@@ -1,14 +1,25 @@
 package be.belgiplast.samples;
 
+import android.app.Activity;
+
 public class PluginImpl implements Plugin {
     private String name;
     private int imageRes;
     private String description;
+    private Class<? extends Activity> implClass;
 
-    public PluginImpl(String name, int imageRes, String description) {
+    public PluginImpl(String name, int imageRes, String description, Class<Activity> implClass) {
         this.name = name;
         this.imageRes = imageRes;
         this.description = description;
+        this.implClass = implClass;
+    }
+
+    public PluginImpl(Plugin plugin) {
+        this.name = plugin.getName();
+        this.imageRes = plugin.getImageResource();
+        this.description = plugin.getDescription();
+        this.implClass = (Class<? extends Activity>)plugin.getClass();
     }
 
     @Override
@@ -36,5 +47,9 @@ public class PluginImpl implements Plugin {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Class<? extends Activity> getImplClass() {
+        return implClass;
     }
 }

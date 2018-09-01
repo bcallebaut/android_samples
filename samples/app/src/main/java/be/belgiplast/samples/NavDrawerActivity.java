@@ -1,5 +1,8 @@
 package be.belgiplast.samples;
 
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.internal.NavigationMenuView;
@@ -20,11 +23,12 @@ import android.widget.AdapterViewFlipper;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class NavDrawerActivity extends AppCompatActivity {
+public class NavDrawerActivity extends AppCompatActivity implements Runnable, Plugin{
 
     private DrawerLayout mDrawerLayout;
     private com.trncic.library.DottedProgressBar pb;
     private AdapterViewFlipper simpleAdapterViewFlipper;
+    private PluginsManager plugins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,10 @@ public class NavDrawerActivity extends AppCompatActivity {
         mDrawerLayout = findViewById(R.id.drawer_layout);
         //pb = findViewById(R.id.progress);
 
+        plugins = new PluginsManager(this);
+        for (Plugin plugin : plugins.getPlugins().values()){
+            System.out.println(plugin.getName());
+        }
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setItemHorizontalPadding(16);
@@ -74,6 +82,7 @@ public class NavDrawerActivity extends AppCompatActivity {
         TabbedView tv = findViewById(R.id.tabbedView);
         tv.add("test1",R.layout.test1);
         tv.add("test2",R.layout.test2);
+        tv.add("test3",R.layout.test3);
         /*
 
         NavigationAdapter adapter = new NavigationAdapter(this);
@@ -145,4 +154,23 @@ public class NavDrawerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void run() {
+
+    }
+
+    @Override
+    public String getName() {
+        return "Mauris faucibus";
+    }
+
+    @Override
+    public int getImageResource() {
+        return 0;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Mauris faucibus ex vitae urna porta fringilla. Aliquam hendrerit, ex sed consectetur commodo, augue quam rhoncus nisi, sit amet blandit mi est non arcu. Sed eros justo, dictum vel commodo quis, iaculis at sapien. Sed sagittis elementum arcu ac porttitor. Donec viverra urna tortor, quis blandit nisl viverra a. Quisque nec felis nisl. Nullam justo eros, tristique ut orci vitae, tempor pulvinar nibh. Donec hendrerit gravida mauris et maximus. Sed ultricies vestibulum tortor, non molestie nisi aliquet vel. Vestibulum elementum ultrices tincidunt. Vestibulum hendrerit sagittis tempus. Etiam sapien nibh, sagittis vel imperdiet ac, iaculis gravida sapien. ";
+    }
 }

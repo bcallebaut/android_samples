@@ -1,6 +1,6 @@
 package be.belgiplast.samples;
 
-interface Plugin {
+public interface Plugin {
     String getName();
 
     int getImageResource();

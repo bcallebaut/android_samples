@@ -1,5 +1,6 @@
 package be.belgiplast.samples;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
-    private List<Holder> availablePlugins = new ArrayList<>();
-    private List<Holder> plugins = new ArrayList<>();
+    private List<Plugin> availablePlugins = new ArrayList<>();
+    private List<Plugin> plugins = new ArrayList<>();
+    private Context context;
 
-    public PluginAdapter() {
+    public PluginAdapter(Context context) {
+        this.context = context;
+        availablePlugins.addAll(((PluginsManager.Provider)context.getApplicationContext()).getPluginsManager().getPlugins().values());
     }
 
     @Override
@@ -28,7 +32,10 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-
+        Plugin plugin = availablePlugins.get(position);
+        holder.name.setText(plugin.getName());
+        holder.description.setText(plugin.getDescription());
+        holder.getImg().setImageResource(plugin.getImageResource());
     }
 
     @Override
@@ -36,32 +43,27 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
         return availablePlugins.size();
     }
 
-    public List<Holder> getAvailablePlugins() {
+    public List<Plugin> getAvailablePlugins() {
         return availablePlugins;
     }
 
-    public List<Holder> getPlugins() {
+    public List<Plugin> getPlugins() {
         return plugins;
     }
 
-    public static class Holder{
-        private View view;
+    public static class Holder extends RecyclerView.ViewHolder{
         private ImageView img;
         private TextView  name;
         private TextView description;
         private ImageButton btn;
 
-
-        public Holder(View view) {
-            setView(view);
-        }
-
-        public final void setView(View view) {
-            this.view = view;
-            setImg((ImageView)view.findViewById(R.id.plugin_image));
-            setName((TextView)view.findViewById(R.id.plugin_name));
-            setDescription((TextView)view.findViewById(R.id.plugin_description));
-            btn = (ImageButton)view.findViewById(R.id.plugin_button);
+        public Holder(View itemView) {
+            super(itemView);
+            setImg((ImageView)itemView.findViewById(R.id.plugin_image));
+            setName((TextView)itemView.findViewById(R.id.plugin_name));
+            setDescription((TextView)itemView.findViewById(R.id.plugin_description));
+            /*
+            btn = (ImageButton)itemView.findViewById(R.id.plugin_button);
             btn.setOnClickListener(new View.OnClickListener(){
 
                 @Override
@@ -69,6 +71,7 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
 
                 }
             });
+*/
         }
 
         public ImageView getImg() {

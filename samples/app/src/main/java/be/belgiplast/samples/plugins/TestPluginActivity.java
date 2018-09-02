@@ -13,7 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import be.belgiplast.samples.Plugin;
+import be.belgiplast.plugins.Plugin;
 
 import be.belgiplast.samples.R;
 

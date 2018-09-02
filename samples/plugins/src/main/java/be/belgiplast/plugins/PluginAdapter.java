@@ -1,4 +1,4 @@
-package be.belgiplast.samples;
+package be.belgiplast.plugins;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

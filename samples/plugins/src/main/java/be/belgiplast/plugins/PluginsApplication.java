@@ -1,8 +1,8 @@
-package be.belgiplast.samples;
+package be.belgiplast.plugins;
 
 import android.app.Application;
 
-public class PluginsApplication extends Application implements PluginsManager.Provider{
+public class PluginsApplication extends Application implements PluginsManager.Provider, PluginSettings.Provider{
     private PluginsManager mgr;
 
     @Override
@@ -14,5 +14,10 @@ public class PluginsApplication extends Application implements PluginsManager.Pr
     @Override
     public PluginsManager getPluginsManager() {
         return mgr;
+    }
+
+    @Override
+    public PluginSettings getPluginSetting() {
+        return null;
     }
 }

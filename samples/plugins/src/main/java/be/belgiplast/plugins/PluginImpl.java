@@ -1,4 +1,4 @@
-package be.belgiplast.samples;
+package be.belgiplast.plugins;
 
 import android.app.Activity;
 

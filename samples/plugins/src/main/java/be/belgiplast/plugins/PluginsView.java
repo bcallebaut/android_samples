@@ -1,4 +1,4 @@
-package be.belgiplast.samples;
+package be.belgiplast.plugins;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -27,7 +27,7 @@ public class PluginsView extends RecyclerView {
         //context.getApplicationContext().getPackageManager().
         setLayoutManager(mLayoutManager);
         setItemAnimator(new DefaultItemAnimator());
-        addItemDecoration(new SimpleDividerItemDecoration(context.getApplicationContext()));
+//        addItemDecoration(new SimpleDividerItemDecoration(context.getApplicationContext()));
         setAdapter(adapter);
     }
 }

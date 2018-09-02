@@ -1,4 +1,4 @@
-package be.belgiplast.samples;
+package be.belgiplast.plugins;
 
 public interface Plugin {
     String getName();

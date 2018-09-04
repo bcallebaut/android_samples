@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
         holder.name.setText(plugin.getName());
         holder.description.setText(plugin.getDescription());
         holder.getImg().setImageResource(plugin.getImageResource());
+        holder.setIndex(position);
     }
 
     @Override
@@ -55,15 +57,16 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
         private ImageView img;
         private TextView  name;
         private TextView description;
-        private ImageButton btn;
+        private Button btn;
+        private int index;
 
         public Holder(View itemView) {
             super(itemView);
             setImg((ImageView)itemView.findViewById(R.id.plugin_image));
             setName((TextView)itemView.findViewById(R.id.plugin_name));
             setDescription((TextView)itemView.findViewById(R.id.plugin_description));
-            /*
-            btn = (ImageButton)itemView.findViewById(R.id.plugin_button);
+
+            btn = (Button)itemView.findViewById(R.id.plugin_button);
             btn.setOnClickListener(new View.OnClickListener(){
 
                 @Override
@@ -71,7 +74,15 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
 
                 }
             });
-*/
+
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
         }
 
         public ImageView getImg() {

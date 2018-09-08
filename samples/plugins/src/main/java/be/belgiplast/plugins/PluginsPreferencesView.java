@@ -28,5 +28,6 @@ public class PluginsPreferencesView extends RecyclerView {
         setItemAnimator(new DefaultItemAnimator());
 //        addItemDecoration(new SimpleDividerItemDecoration(context.getApplicationContext()));
         setAdapter(adapter);
+
     }
 }

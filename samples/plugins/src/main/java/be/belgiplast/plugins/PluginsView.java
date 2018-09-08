@@ -21,7 +21,7 @@ public class PluginsView extends RecyclerView {
 
     public PluginsView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        adapter = new PluginAdapter(context);
+        adapter = new PluginAdapter(this);
         setAdapter(adapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context.getApplicationContext());
         //context.getApplicationContext().getPackageManager().
@@ -30,4 +30,6 @@ public class PluginsView extends RecyclerView {
 //        addItemDecoration(new SimpleDividerItemDecoration(context.getApplicationContext()));
         setAdapter(adapter);
     }
+
+
 }

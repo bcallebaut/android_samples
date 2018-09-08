@@ -44,5 +44,7 @@ public class PluginSettingsHolder extends RecyclerView.ViewHolder {
         this.data = data;
         name.setText(data.getName());
         icon.setImageResource(data.getIcon());
+        up.setOnClickListener(upListener);
+        down.setOnClickListener(downListener);
     }
 }

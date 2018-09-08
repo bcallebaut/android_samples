@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +18,16 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
     private List<Plugin> availablePlugins = new ArrayList<>();
     private List<Plugin> plugins = new ArrayList<>();
     private Context context;
+    private PluginsView container;
+    private PluginsManager mgr;
+    private PluginSettings settings;
 
-    public PluginAdapter(Context context) {
-        this.context = context;
-        availablePlugins.addAll(((PluginsManager.Provider)context.getApplicationContext()).getPluginsManager().getPlugins().values());
+    public PluginAdapter(PluginsView view) {
+        this.context = view.getContext();
+        container = view;
+        mgr = ((PluginsManager.Provider)context.getApplicationContext()).getPluginsManager();
+        settings = ((PluginSettings.Provider)context.getApplicationContext()).getPluginSetting();
+        availablePlugins.addAll(mgr.getPlugins().values());
     }
 
     @Override
@@ -28,7 +35,7 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.plugin_layout, parent, false);
 
-        return new Holder(itemView);
+        return new Holder(itemView,this);
     }
 
     @Override
@@ -42,7 +49,7 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
 
     @Override
     public int getItemCount() {
-        return availablePlugins.size();
+        return mgr.getPlugins().values().size();
     }
 
     public List<Plugin> getAvailablePlugins() {
@@ -53,6 +60,15 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
         return plugins;
     }
 
+    private void onItemClick(Holder holder,boolean checked){
+        Plugin p = availablePlugins.get(holder.index);
+        if (checked) {
+            settings.add(p);
+        }else{
+            settings.remove(p);
+        }
+    }
+
     public static class Holder extends RecyclerView.ViewHolder{
         private ImageView img;
         private TextView  name;
@@ -60,7 +76,7 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
         private Button btn;
         private int index;
 
-        public Holder(View itemView) {
+        public Holder(View itemView, final PluginAdapter adapter) {
             super(itemView);
             setImg((ImageView)itemView.findViewById(R.id.plugin_image));
             setName((TextView)itemView.findViewById(R.id.plugin_name));
@@ -71,7 +87,7 @@ public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.Holder> {
 
                 @Override
                 public void onClick(View v) {
-
+                    adapter.onItemClick(Holder.this,((ToggleButton)btn).isChecked());
                 }
             });
 

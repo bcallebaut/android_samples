@@ -16,6 +16,13 @@ public class PluginSettingsAdapter extends RecyclerView.Adapter<PluginSettingsHo
     public PluginSettingsAdapter(Context context) {
         this.context = context;
         settings = ((PluginSettings.Provider)context.getApplicationContext()).getPluginSetting();
+        settings.setListener(new PluginSettings.ContentListener(){
+
+            @Override
+            public void notifyDatasetChanged() {
+                PluginSettingsAdapter.this.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -26,7 +33,7 @@ public class PluginSettingsAdapter extends RecyclerView.Adapter<PluginSettingsHo
     @NonNull
     @Override
     public PluginSettingsHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plugin_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plugin_pref_row, parent, false);
         PluginSettingsHolder holder = new PluginSettingsHolder(view);
         return holder;
     }

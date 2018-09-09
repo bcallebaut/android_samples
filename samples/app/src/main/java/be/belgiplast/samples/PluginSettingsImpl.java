@@ -64,17 +64,17 @@ public class PluginSettingsImpl implements PluginSettings {
             plugins.remove(index);
             plugins.add(index - 1, setting);
             if (listener != null)
-                listener.notifyDatasetChanged();
+                listener.notifyMoveUp(index);
         }
     }
 
     private void moveDown(PluginSettingImpl setting) {
         int index = plugins.indexOf(setting);
-        if (index >= 0  && index < plugins.size() - 2){
+        if (index >= 0  && index < plugins.size() - 1){
             plugins.remove(index);
             plugins.add(index + 1, setting);
             if (listener != null)
-                listener.notifyDatasetChanged();
+                listener.nottifyMoveDown(index);
         }
     }
 
@@ -117,6 +117,11 @@ public class PluginSettingsImpl implements PluginSettings {
         @Override
         public int getIcon() {
             return plugin.getImageResource();
+        }
+
+        @Override
+        public int getPosition() {
+            return PluginSettingsImpl.this.plugins.indexOf(this);
         }
     }
 }

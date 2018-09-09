@@ -20,7 +20,21 @@ public class PluginSettingsAdapter extends RecyclerView.Adapter<PluginSettingsHo
 
             @Override
             public void notifyDatasetChanged() {
-                PluginSettingsAdapter.this.notifyDataSetChanged();
+                PluginSettingsAdapter.this.notifyChanges();
+            }
+
+            @Override
+            public void notifyMoveUp(int position) {
+                PluginSettingsAdapter.this.notifyItemMoved(position,position - 1);
+                PluginSettingsAdapter.this.notifyItemChanged(position);
+                PluginSettingsAdapter.this.notifyItemChanged(position - 1);
+            }
+
+            @Override
+            public void nottifyMoveDown(int position) {
+                PluginSettingsAdapter.this.notifyItemMoved(position,position + 1);
+                PluginSettingsAdapter.this.notifyItemChanged(position);
+                PluginSettingsAdapter.this.notifyItemChanged(position + 1);
             }
         });
     }
@@ -46,5 +60,10 @@ public class PluginSettingsAdapter extends RecyclerView.Adapter<PluginSettingsHo
     @Override
     public int getItemCount() {
         return settings.getCount();
+    }
+
+    private void notifyChanges(){
+        //super.notifyItemMoved();
+        notifyDataSetChanged();
     }
 }

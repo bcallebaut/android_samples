@@ -17,5 +17,7 @@ public interface PluginSettings {
 
     interface ContentListener{
         void notifyDatasetChanged();
+        void notifyMoveUp(int position);
+        void nottifyMoveDown(int position);
     }
 }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 public class PluginSettingsHolder extends RecyclerView.ViewHolder {
     private final ImageView icon;
+    private final TextView index;
     private final TextView name;
     private final ImageButton up;
     private final ImageButton down;
@@ -18,6 +19,7 @@ public class PluginSettingsHolder extends RecyclerView.ViewHolder {
 
     public PluginSettingsHolder(@NonNull View itemView) {
         super(itemView);
+        index = itemView.findViewById(R.id.index);
         icon = itemView.findViewById(R.id.icon);
         name = itemView.findViewById(R.id.name);
         up = itemView.findViewById(R.id.up);
@@ -43,6 +45,7 @@ public class PluginSettingsHolder extends RecyclerView.ViewHolder {
     public final void bind(PluginSetting data){
         this.data = data;
         name.setText(data.getName());
+        index.setText(String.format("%d",data.getPosition() + 1));
         icon.setImageResource(data.getIcon());
         up.setOnClickListener(upListener);
         down.setOnClickListener(downListener);

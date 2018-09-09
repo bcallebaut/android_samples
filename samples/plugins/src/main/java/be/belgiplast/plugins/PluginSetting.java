@@ -5,4 +5,5 @@ public interface PluginSetting {
     void moveDown();
     String getName();
     int getIcon();
+    int getPosition();
 }

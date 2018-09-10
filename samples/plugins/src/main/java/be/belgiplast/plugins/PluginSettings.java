@@ -9,7 +9,7 @@ public interface PluginSettings {
     PluginSetting getSettings(Plugin plugin);
     PluginSetting getSettings(int index);
     int getCount();
-    public void setListener(ContentListener content);
+    public void addListener(ContentListener content);
 
     interface Provider{
         PluginSettings getPluginSetting();
@@ -18,6 +18,6 @@ public interface PluginSettings {
     interface ContentListener{
         void notifyDatasetChanged();
         void notifyMoveUp(int position);
-        void nottifyMoveDown(int position);
+        void notifyMoveDown(int position);
     }
 }

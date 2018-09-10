@@ -16,7 +16,7 @@ public class PluginSettingsAdapter extends RecyclerView.Adapter<PluginSettingsHo
     public PluginSettingsAdapter(Context context) {
         this.context = context;
         settings = ((PluginSettings.Provider)context.getApplicationContext()).getPluginSetting();
-        settings.setListener(new PluginSettings.ContentListener(){
+        settings.addListener(new PluginSettings.ContentListener(){
 
             @Override
             public void notifyDatasetChanged() {
@@ -31,7 +31,7 @@ public class PluginSettingsAdapter extends RecyclerView.Adapter<PluginSettingsHo
             }
 
             @Override
-            public void nottifyMoveDown(int position) {
+            public void notifyMoveDown(int position) {
                 PluginSettingsAdapter.this.notifyItemMoved(position,position + 1);
                 PluginSettingsAdapter.this.notifyItemChanged(position);
                 PluginSettingsAdapter.this.notifyItemChanged(position + 1);

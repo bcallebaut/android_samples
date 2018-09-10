@@ -2,6 +2,7 @@ package be.belgiplast.samples;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import be.belgiplast.plugins.Plugin;
 import be.belgiplast.plugins.PluginSetting;
@@ -9,7 +10,7 @@ import be.belgiplast.plugins.PluginSettings;
 
 public class PluginSettingsImpl implements PluginSettings {
     private LinkedList<PluginSettingImpl> plugins;
-    private ContentListener listener;
+    private List<ContentListener> listener = new ArrayList<>();
 
     public PluginSettingsImpl() {
         plugins = new LinkedList<>();
@@ -24,7 +25,8 @@ public class PluginSettingsImpl implements PluginSettings {
     public void add(Plugin plugin) {
         plugins.add(new PluginSettingImpl(plugin));
         if (listener != null)
-            listener.notifyDatasetChanged();
+            for (ContentListener l : listener)
+                l.notifyDatasetChanged();
     }
 
     @Override
@@ -45,7 +47,8 @@ public class PluginSettingsImpl implements PluginSettings {
     public void remove(Plugin setting) {
         plugins.remove(getSettings(setting));
         if (listener != null)
-            listener.notifyDatasetChanged();
+            for (ContentListener l : listener)
+                l.notifyDatasetChanged();
     }
 
     @Override
@@ -64,7 +67,8 @@ public class PluginSettingsImpl implements PluginSettings {
             plugins.remove(index);
             plugins.add(index - 1, setting);
             if (listener != null)
-                listener.notifyMoveUp(index);
+                for (ContentListener l : listener)
+                    l.notifyMoveUp(index);
         }
     }
 
@@ -74,7 +78,8 @@ public class PluginSettingsImpl implements PluginSettings {
             plugins.remove(index);
             plugins.add(index + 1, setting);
             if (listener != null)
-                listener.nottifyMoveDown(index);
+                for (ContentListener l : listener)
+                    l.notifyMoveDown(index);
         }
     }
 
@@ -84,8 +89,8 @@ public class PluginSettingsImpl implements PluginSettings {
     }
 
     @Override
-    public void setListener(ContentListener content) {
-        this.listener = content;
+    public void addListener(ContentListener content) {
+        this.listener.add(content);
     }
 
     private class PluginSettingImpl implements PluginSetting{

@@ -21,6 +21,7 @@ public class NavDrawerActivity extends AppCompatActivity implements Runnable, Pl
     private com.trncic.library.DottedProgressBar pb;
     private AdapterViewFlipper simpleAdapterViewFlipper;
     private PluginsManager plugins;
+    private PreferredPluginsTracker tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class NavDrawerActivity extends AppCompatActivity implements Runnable, Pl
                 });
         //((NavigationMenuView)navigationView.getChildAt(0)).addItemDecoration(new DividerItemDecoration(NavDrawerActivity.this,DividerItemDecoration.VERTICAL));
         SubMenu group1 = navigationView.getMenu().addSubMenu("Preferred");
+        tracker = new PreferredPluginsTracker(navigationView,((PluginsApplication)getApplicationContext()).getPluginSetting());
 
         group1.add("Import");
         group1.add("Gallery");

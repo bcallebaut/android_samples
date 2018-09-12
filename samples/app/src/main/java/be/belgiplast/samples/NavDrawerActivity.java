@@ -73,11 +73,13 @@ public class NavDrawerActivity extends AppCompatActivity implements Runnable, Pl
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
+
         TabbedView tv = findViewById(R.id.tabbedView);
         tv.add("test1",R.layout.test1);
         tv.add("test2",R.layout.test2);
         tv.add("test3",R.layout.test3);
         tv.add("test4",R.layout.test4);
+
         /*
 
         NavigationAdapter adapter = new NavigationAdapter(this);

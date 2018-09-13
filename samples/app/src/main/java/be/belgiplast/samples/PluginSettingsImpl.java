@@ -1,5 +1,7 @@
 package be.belgiplast.samples;
 
+import android.content.Intent;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -127,6 +129,11 @@ public class PluginSettingsImpl implements PluginSettings {
         @Override
         public int getPosition() {
             return PluginSettingsImpl.this.plugins.indexOf(this);
+        }
+
+        @Override
+        public Intent getIntent() {
+            return plugin.getIntent();
         }
     }
 }

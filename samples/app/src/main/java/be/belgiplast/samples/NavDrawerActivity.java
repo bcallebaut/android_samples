@@ -1,5 +1,6 @@
 package be.belgiplast.samples;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -169,5 +170,9 @@ public class NavDrawerActivity extends AppCompatActivity implements Runnable, Pl
     @Override
     public String getDescription() {
         return "Mauris faucibus ex vitae urna porta fringilla. Aliquam hendrerit, ex sed consectetur commodo, augue quam rhoncus nisi, sit amet blandit mi est non arcu. Sed eros justo, dictum vel commodo quis, iaculis at sapien. Sed sagittis elementum arcu ac porttitor. Donec viverra urna tortor, quis blandit nisl viverra a. Quisque nec felis nisl. Nullam justo eros, tristique ut orci vitae, tempor pulvinar nibh. Donec hendrerit gravida mauris et maximus. Sed ultricies vestibulum tortor, non molestie nisi aliquet vel. Vestibulum elementum ultrices tincidunt. Vestibulum hendrerit sagittis tempus. Etiam sapien nibh, sagittis vel imperdiet ac, iaculis gravida sapien. ";
+    }
+
+    public Intent getIntent(){
+        return new Intent(getApplicationContext(),this.getClass());
     }
 }

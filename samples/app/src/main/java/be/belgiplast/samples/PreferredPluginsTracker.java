@@ -32,7 +32,7 @@ public class PreferredPluginsTracker {
                     final int j = i;
                     MenuItem item = menu.add(setting.getName());
                     item.setIcon(setting.getIcon());
-                    //item.setIntent();
+                    item.setIntent(setting.getIntent());
                 }
             }
 

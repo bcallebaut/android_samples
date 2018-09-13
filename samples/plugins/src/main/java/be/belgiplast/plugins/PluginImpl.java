@@ -1,6 +1,7 @@
 package be.belgiplast.plugins;
 
 import android.app.Activity;
+import android.content.Intent;
 
 public class PluginImpl implements Plugin {
     private String name;
@@ -43,6 +44,11 @@ public class PluginImpl implements Plugin {
     @Override
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public Intent getIntent() {
+        return null;//return new Intent(getApplicationContent(),implClass);
     }
 
     public void setDescription(String description) {

@@ -24,7 +24,7 @@ public class PluginsManager {
                 Class clz = Class.forName(actInfo.name);
                 if (Plugin.class.isAssignableFrom(clz)){
                     try{
-                        plugins.put(actInfo.name,new PluginImpl((Plugin)clz.newInstance()));
+                        plugins.put(actInfo.name,new PluginImpl(context,(Plugin)clz.newInstance()));
                     }catch (Exception e){}
                 }
             }

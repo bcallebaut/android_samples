@@ -1,6 +1,7 @@
 package be.belgiplast.plugins;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 public class PluginImpl implements Plugin {
@@ -8,6 +9,7 @@ public class PluginImpl implements Plugin {
     private int imageRes;
     private String description;
     private Class<? extends Activity> implClass;
+    private Context context;
 
     public PluginImpl(String name, int imageRes, String description, Class<Activity> implClass) {
         this.name = name;
@@ -16,11 +18,12 @@ public class PluginImpl implements Plugin {
         this.implClass = implClass;
     }
 
-    public PluginImpl(Plugin plugin) {
+    public PluginImpl(Context context, Plugin plugin) {
         this.name = plugin.getName();
         this.imageRes = plugin.getImageResource();
         this.description = plugin.getDescription();
         this.implClass = (Class<? extends Activity>)plugin.getClass();
+        this.context = context;
     }
 
     @Override
@@ -48,7 +51,7 @@ public class PluginImpl implements Plugin {
 
     @Override
     public Intent getIntent() {
-        return null;//return new Intent(getApplicationContent(),implClass);
+        return new Intent(context,implClass);
     }
 
     public void setDescription(String description) {

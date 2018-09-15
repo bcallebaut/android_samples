@@ -2,6 +2,7 @@ package be.belgiplast.samples;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,10 +14,13 @@ import android.view.SubMenu;
 import android.widget.AdapterViewFlipper;
 import android.widget.TextView;
 
+import java.util.Iterator;
+import java.util.ServiceLoader;
+
 import be.belgiplast.plugins.Plugin;
 import be.belgiplast.plugins.PluginsManager;
 
-public class NavDrawerActivity extends AppCompatActivity implements Runnable, Plugin {
+public class NavDrawerActivity extends AppCompatActivity implements Runnable, Plugin,NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private com.trncic.library.DottedProgressBar pb;
@@ -28,8 +32,13 @@ public class NavDrawerActivity extends AppCompatActivity implements Runnable, Pl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_drawer);
+        ServiceLoader<Plugin> pls = ServiceLoader.load(Plugin.class);
+        Iterator<Plugin> it = pls.iterator();
+        while (it.hasNext())
+            System.out.println(it.next().getName());
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
+
         //pb = findViewById(R.id.progress);
 
         plugins = new PluginsManager(this);
@@ -38,6 +47,7 @@ public class NavDrawerActivity extends AppCompatActivity implements Runnable, Pl
         }
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 //        navigationView.setItemHorizontalPadding(16);
         //navigationView.setBackgroundResource(R.drawable.item_gradient);
         //navigationView.setItemBackgroundResource(R.drawable.item_gradient2);
@@ -174,5 +184,10 @@ public class NavDrawerActivity extends AppCompatActivity implements Runnable, Pl
 
     public Intent getIntent(){
         return new Intent(getApplicationContext(),this.getClass());
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 }

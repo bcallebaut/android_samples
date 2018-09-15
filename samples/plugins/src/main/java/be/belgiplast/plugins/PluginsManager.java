@@ -19,6 +19,7 @@ public class PluginsManager {
         try{
             PackageInfo pkgInfo = pkgmgr.getPackageInfo(context.getApplicationContext().getPackageName(),PackageManager.GET_ACTIVITIES);
             for (ActivityInfo actInfo :pkgInfo.activities){
+
                 if (context.getPackageName().equals(actInfo.name));
 //                    continue;
                 Class clz = Class.forName(actInfo.name);

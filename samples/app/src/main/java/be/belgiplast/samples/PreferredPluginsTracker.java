@@ -32,7 +32,19 @@ public class PreferredPluginsTracker {
                     final int j = i;
                     MenuItem item = menu.add(setting.getName());
                     item.setIcon(setting.getIcon());
+
                     item.setIntent(setting.getIntent());
+                    item.setCheckable(false);
+                    item.setEnabled(true);
+
+                    item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            view.getContext().startActivity(item.getIntent());
+                            return false;
+                        }
+                    });
+
                 }
             }
 

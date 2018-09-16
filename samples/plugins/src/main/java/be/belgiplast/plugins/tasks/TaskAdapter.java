@@ -2,13 +2,19 @@ package be.belgiplast.plugins.tasks;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import be.belgiplast.plugins.PluginSettingsHolder;
+import be.belgiplast.plugins.R;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements TaskClickListener{
 
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();
     private TaskClickListener listener;
 
     public TaskAdapter() {
@@ -24,6 +30,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
 
     public final void setListener(TaskClickListener listener) {
         this.listener = listener;
+    }
+
+    public int indexOf(Object o) {
+        return tasks.indexOf(o);
     }
 
     public void setTasks(List<Task> tasks) {
@@ -61,10 +71,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
 
     @NonNull
     @Override
-    public TaskHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        TaskView view = new TaskView(viewGroup.getContext());
-        viewGroup.addView(view);
-        return new TaskHolder(view);
+    public TaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_row, parent, false);
+        TaskHolder holder = new TaskHolder(view);
+        return holder;
     }
 
     @Override

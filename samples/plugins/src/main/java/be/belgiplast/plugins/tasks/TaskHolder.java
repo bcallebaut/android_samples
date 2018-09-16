@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import be.belgiplast.plugins.PluginSetting;
+import be.belgiplast.plugins.R;
 
 class TaskHolder extends RecyclerView.ViewHolder implements TaskClickListener{
     private TaskView view;
@@ -12,7 +12,7 @@ class TaskHolder extends RecyclerView.ViewHolder implements TaskClickListener{
 
     public TaskHolder(@NonNull View itemView) {
         super(itemView);
-        this.view = (TaskView) itemView;
+        this.view = (TaskView) itemView.findViewById(R.id.taskView);
     }
 
     @Override

@@ -57,7 +57,7 @@ public class TaskView extends ConstraintLayout implements Task{
     public void setProgress(int value){
         if (value < 0) value = 0;
         if (value > 100) value = 100;
-        progressText.setText(String.format("%d %",value));
+        progressText.setText(String.format("%d %%",value));
         progress.setProgress(value);
     }
 
@@ -101,6 +101,15 @@ public class TaskView extends ConstraintLayout implements Task{
     public String getName() {
         try{
             return binding.get().getName();
+        }   catch (NullPointerException npe){
+            return "";
+        }
+    }
+
+    @Override
+    public String getDescription() {
+        try{
+            return binding.get().getDescription();
         }   catch (NullPointerException npe){
             return "";
         }

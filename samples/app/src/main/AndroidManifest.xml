@@ -11,20 +11,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".NavDrawerActivity">
-            <intent-filter>
+            <!--intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <meta-data android:name="blah" android:value="123"/>
+            </intent-filter-->
+
+            <meta-data
+                android:name="blah"
+                android:value="123" />
         </activity>
         <activity
             android:name=".plugins.TestPluginActivity"
             android:label="@string/title_activity_test_plugin"
             android:parentActivityName=".NavDrawerActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <meta-data
+            <!--meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="be.belgiplast.samples.NavDrawerActivity" />
+                android:value="be.belgiplast.samples.NavDrawerActivity" /-->
+        </activity>
+        <activity android:name=".TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

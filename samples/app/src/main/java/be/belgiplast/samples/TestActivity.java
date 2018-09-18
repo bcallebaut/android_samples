@@ -12,7 +12,7 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        /*
+
         TasksView tv = (TasksView)findViewById(R.id.testview);
         tv.getTasks().add(new Task(){
 
@@ -36,6 +36,6 @@ public class TestActivity extends AppCompatActivity {
                 return 75;
             }
         });
-        */
+
     }
 }

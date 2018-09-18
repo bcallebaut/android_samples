@@ -16,7 +16,7 @@ import java.util.Observer;
 
 import be.belgiplast.plugins.R;
 
-public class TaskEditor extends ConstraintLayout implements Task{
+public class TaskEditor extends ConstraintLayout implements MutableTask{
 
     private String origName;
     private String origDescription;
@@ -139,4 +139,22 @@ public class TaskEditor extends ConstraintLayout implements Task{
         }
     }
 
+    public void setName(String name){
+        binding.setName(name);
+    }
+
+    @Override
+    public void setDescription(String description) {
+        binding.setDescription(description);
+    }
+
+    @Override
+    public void setIcon(int icon) {
+        binding.setIcon(icon);
+    }
+
+    @Override
+    public void setProgress(int progress) {
+        binding.setProgress(progress);
+    }
 }

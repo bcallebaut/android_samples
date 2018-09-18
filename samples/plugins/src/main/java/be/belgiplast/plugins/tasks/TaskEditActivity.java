@@ -10,6 +10,8 @@ import be.belgiplast.plugins.R;
 
 public class TaskEditActivity extends AppCompatActivity {
 
+    private TaskEditor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +19,8 @@ public class TaskEditActivity extends AppCompatActivity {
 
         final ImageButton cancel = (ImageButton)findViewById(R.id.cancelBtn);
         final ImageButton save = (ImageButton)findViewById(R.id.saveBtn);
-        final TaskEditor editor = findViewById(R.id.taskeditor);
+        editor = findViewById(R.id.taskeditor);
+        editor.bind(new MutableTaskImpl());
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,5 +44,19 @@ public class TaskEditActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        Intent intent = getIntent();
+        if (intent != null){
+            if (intent.getStringExtra("name") != null){
+                editor.setName(intent.getStringExtra("name"));
+            }
+            if (intent.getStringExtra("description") != null){
+                editor.setDescription(intent.getStringExtra("description"));
+            }
+        }
     }
 }

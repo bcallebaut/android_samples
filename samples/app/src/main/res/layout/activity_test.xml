@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TestActivity">
-    <be.belgiplast.plugins.tasks.TaskEditor
+    <!--be.belgiplast.plugins.tasks.TaskEditor
         android:id="@+id/testview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,6 +16,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         >
 
-    </be.belgiplast.plugins.tasks.TaskEditor>
+    </be.belgiplast.plugins.tasks.TaskEditor-->
+    <be.belgiplast.plugins.tasks.TasksView
+        android:id="@+id/testview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        ></be.belgiplast.plugins.tasks.TasksView>
 
 </android.support.constraint.ConstraintLayout>

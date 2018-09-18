@@ -80,6 +80,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
     @Override
     public void onBindViewHolder(@NonNull TaskHolder taskHolder, int i) {
         taskHolder.bind(tasks.get(i));
+        taskHolder.setListener(listener);
     }
 
     @Override

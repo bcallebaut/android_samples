@@ -32,6 +32,8 @@ public class TasksView extends RecyclerView {
             public void onTaskClicked(Task task) {
                 int requestCode = adapter.indexOf(task);
                 Intent intent = new Intent(getContext(),TaskEditActivity.class);
+                intent.putExtra("name",task.getName());
+                intent.putExtra("description",task.getDescription());
                 ((Activity)getContext()).startActivityForResult(intent, requestCode | 0x12000);
             }
         });

@@ -141,11 +141,15 @@ public class TaskEditor extends ConstraintLayout implements MutableTask{
 
     public void setName(String name){
         binding.setName(name);
+        origName = name;
+        this.name.setText(name);
     }
 
     @Override
     public void setDescription(String description) {
         binding.setDescription(description);
+        origDescription = description;
+        this.description.setText(description);
     }
 
     @Override

@@ -34,7 +34,7 @@ public class TasksView extends RecyclerView {
                 Intent intent = new Intent(getContext(),TaskEditActivity.class);
                 intent.putExtra("name",task.getName());
                 intent.putExtra("description",task.getDescription());
-                ((Activity)getContext()).startActivityForResult(intent, requestCode | 0x12000);
+                ((Activity)getContext()).startActivityForResult(intent, requestCode | 0x1200);
             }
         });
         setAdapter(adapter);
@@ -46,13 +46,19 @@ public class TasksView extends RecyclerView {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if ((requestCode & 0x12000) != 0x12000)
+        if ((requestCode & 0x1200) != 0x1200)
             return;
-        requestCode = requestCode &~0x12000;
+        requestCode = requestCode &~0x1200;
         if (resultCode == 0){
-            MutableTask tsk = (MutableTask)adapter.getTasks().get(requestCode);
-            tsk.setName(data.getStringExtra("name"));
-            tsk.setDescription(data.getStringExtra("description"));
+            Object obj = adapter.getTasks().get(requestCode);
+            try {
+                MutableTask tsk = (MutableTask) obj;
+                tsk.setName(data.getStringExtra("name"));
+                tsk.setDescription(data.getStringExtra("description"));
+                adapter.notifyItemChanged(requestCode);
+            }catch (ClassCastException cce){
+                cce.printStackTrace();
+            }
         }
     }
 

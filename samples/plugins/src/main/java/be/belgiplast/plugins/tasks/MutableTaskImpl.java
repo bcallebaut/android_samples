@@ -6,6 +6,16 @@ public class MutableTaskImpl implements MutableTask {
     private String description;
     private int progress;
 
+    public MutableTaskImpl() {
+    }
+
+    public MutableTaskImpl(int icon, String name, String description, int progress) {
+        this.icon = icon;
+        this.name = name;
+        this.description = description;
+        this.progress = progress;
+    }
+
     @Override
     public int getIcon() {
         return icon;

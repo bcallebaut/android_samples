@@ -31,5 +31,6 @@ class TaskHolder extends RecyclerView.ViewHolder implements TaskClickListener{
 
     public final void bind(Task data){
         view.bind(data);
+        view.setListener(listener);
     }
 }

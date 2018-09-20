@@ -3,7 +3,8 @@
     package="be.belgiplast.plugins">
 
     <application>
-        <activity android:name=".tasks.TaskEditActivity"></activity>
+        <activity android:name=".tasks.TaskEditActivity"
+            ></activity>
     </application>
 
 </manifest>

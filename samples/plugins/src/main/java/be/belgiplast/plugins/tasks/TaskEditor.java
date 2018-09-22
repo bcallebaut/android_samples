@@ -43,8 +43,21 @@ public class TaskEditor extends ConstraintLayout implements MutableTask{
 
     private void init(){
         inflate(getContext(), R.layout.task_editor,this);
+        binding = new MutableTaskImpl();
         name = findViewById(R.id.taskName);
         description = findViewById(R.id.description);
+        name.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                binding.setName(name.getText().toString());
+            }
+        });
+        description.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                binding.setDescription(description.getText().toString());
+            }
+        });
     }
 
     public TaskClickListener getListener() {

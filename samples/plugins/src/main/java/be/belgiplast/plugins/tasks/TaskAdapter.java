@@ -16,6 +16,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
 
     private List<Task> tasks = new ArrayList<>();
     private TaskClickListener listener;
+    private TaskEditor editor;
+    private TaskView view;
 
     public TaskAdapter() {
     }
@@ -34,6 +36,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
 
     public int indexOf(Object o) {
         return tasks.indexOf(o);
+    }
+
+    public void addTask(MutableTask task){
+        tasks.add(task);
+        int index = tasks.indexOf(task);
+        notifyItemInserted(index);
+    }
+
+    public void removeTask(MutableTask task){
+        int index = tasks.indexOf(task);
+        tasks.remove(task);
+        notifyItemRemoved(index);
     }
 
     public void setTasks(List<Task> tasks) {
@@ -72,15 +86,22 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
     @NonNull
     @Override
     public TaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_row, parent, false);
-        TaskHolder holder = new TaskHolder(view);
-        holder.setListener(listener);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_row, parent, false);
+        view = v.findViewById(R.id.taskView);
+        editor = v.findViewById(R.id.taskEditor);
+        try{
+            editor.setVisibility(View.GONE);
+        }catch (Exception e){
+
+        }
+        TaskHolder holder = new TaskHolder(v);
+        holder.setListener(this);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull TaskHolder taskHolder, int i) {
-        taskHolder.bind(tasks.get(i));
+        taskHolder.bind((MutableTask)tasks.get(i));
         taskHolder.setListener(listener);
     }
 
@@ -91,7 +112,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
 
     @Override
     public void onTaskClicked(Task task) {
-        if (listener != null)
-            listener.onTaskClicked(task);
+        //if (listener != null)
+        //    listener.onTaskClicked(task);
+        try {
+            if (editor.getVisibility() == View.GONE)
+                editor.setVisibility(View.VISIBLE);
+            else {
+                editor.setVisibility(View.GONE);
+                view.setName(editor.getName());
+                view.setDescription(editor.getDescription());
+            }
+        }catch (Exception e){}
     }
 }

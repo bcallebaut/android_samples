@@ -20,9 +20,9 @@ public class TaskView extends ConstraintLayout implements Task{
     private TextView progressText;
     private ProgressBar progress;
 
-    private WeakReference<Task> binding;
+    private WeakReference<MutableTask> binding;
 
-    private TaskClickListener listener;
+    private TaskPartClickListener listener;
 
     public TaskView(Context context) {
         this(context,null);
@@ -44,13 +44,35 @@ public class TaskView extends ConstraintLayout implements Task{
         progressText = findViewById(R.id.progress);
         progress = findViewById(R.id.progressBar);
         progress.setMax(100);
+
+        name.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null)
+                    listener.nameClicked(name.getVisibility() == View.VISIBLE);
+            }
+        });
+        icon.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null)
+                    listener.iconClicked(icon.getVisibility() == View.VISIBLE);
+            }
+        });
+        progress.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null)
+                    listener.progressClicked(progress.getVisibility() == View.VISIBLE);
+            }
+        });
     }
 
-    public TaskClickListener getListener() {
+    public TaskPartClickListener getListener() {
         return listener;
     }
 
-    public void setListener(TaskClickListener listener) {
+    public void setListener(TaskPartClickListener listener) {
         this.listener = listener;
     }
 
@@ -61,7 +83,7 @@ public class TaskView extends ConstraintLayout implements Task{
         progress.setProgress(value);
     }
 
-    public void bind(final Task task){
+    public void bind(final MutableTask task){
         binding = new WeakReference<>(task);
         icon.setImageResource(task.getIcon());
         name.setText(task.getName());
@@ -79,13 +101,7 @@ public class TaskView extends ConstraintLayout implements Task{
             });
         }
 
-        icon.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null)
-                    listener.onTaskClicked(task);
-            }
-        });
+
     }
 
     @Override
@@ -115,6 +131,24 @@ public class TaskView extends ConstraintLayout implements Task{
         }
     }
 
+
+    public void setName(String name) {
+        try{
+            binding.get().setName(name);
+            this.name.setText(name);
+        }   catch (NullPointerException npe){
+
+        }
+    }
+
+    public void setDescription(String name) {
+        try{
+            binding.get().setDescription(name);
+        }   catch (NullPointerException npe){
+
+        }
+    }
+
     @Override
     public int getProgress() {
         try{
@@ -123,5 +157,7 @@ public class TaskView extends ConstraintLayout implements Task{
             return 0;
         }
     }
+
+
 
 }

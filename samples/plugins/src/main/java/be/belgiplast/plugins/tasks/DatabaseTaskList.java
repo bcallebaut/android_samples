@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 public class DatabaseTaskList implements List<MutableTask> {
     private ArrayList<MutableTask> tasks = new ArrayList<>();
 
-    
+
 
     public void trimToSize() {
         tasks.trimToSize();

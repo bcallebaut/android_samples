@@ -1,9 +1,21 @@
 package be.belgiplast.plugins.tasks;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity(tableName = "task")
 public class MutableTaskImpl implements MutableTask {
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
+    private int id = 0;
     private int icon;
+    @NonNull
     private String name;
     private String description;
+    @NonNull
     private int progress;
 
     public MutableTaskImpl() {
@@ -14,6 +26,14 @@ public class MutableTaskImpl implements MutableTask {
         this.name = name;
         this.description = description;
         this.progress = progress;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

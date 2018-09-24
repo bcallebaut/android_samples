@@ -9,15 +9,15 @@ import java.util.List;
 public class TaskViewModel extends AndroidViewModel {
     private TaskRepository mRepository;
 
-    private LiveData<List<MutableTaskImpl>> mAllTasks;
+    private LiveData<List<MutableTaskImpl>> mAllWords;
 
     public TaskViewModel (Application application) {
         super(application);
         mRepository = new TaskRepository(application);
-        mAllTasks = mRepository.getAllTasks();
+        mAllWords = mRepository.getAllTasks();
     }
 
-    LiveData<List<MutableTaskImpl>> getAllTasks() { return mAllTasks; }
+    LiveData<List<MutableTaskImpl>> getAllTasks() { return mAllWords; }
 
     public void insert(MutableTaskImpl word) { mRepository.insert(word); }
 }

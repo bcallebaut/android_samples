@@ -22,7 +22,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
     public TaskAdapter() {
     }
 
-    public List<Task> getTasks() {
+    public List<? extends Task> getTasks() {
         return tasks;
     }
 
@@ -39,7 +39,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
     }
 
     public void addTask(MutableTask task){
-        tasks.add(task);
+        tasks.add((Task)task);
         int index = tasks.indexOf(task);
         notifyItemInserted(index);
     }
@@ -50,8 +50,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
         notifyItemRemoved(index);
     }
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public void setTasks(List<? extends Task> tasks) {
+        this.tasks.clear();
+        this.tasks.addAll(tasks);
         /*
         if (tasks instanceof MutableList){
             try{

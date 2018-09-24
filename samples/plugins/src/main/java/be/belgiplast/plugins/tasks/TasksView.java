@@ -2,6 +2,8 @@ package be.belgiplast.plugins.tasks;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,7 +26,10 @@ import be.belgiplast.plugins.R;
 
 public class TasksView extends RecyclerView {
 
+    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+
     private TaskAdapter adapter;
+    private TaskViewModel mWordViewModel;
 
     public TasksView(Context context) {
         this(context, null,0);
@@ -37,6 +42,14 @@ public class TasksView extends RecyclerView {
     public TasksView(final Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         adapter = new TaskAdapter();
+        mWordViewModel = ViewModelProviders.of((FragmentActivity)context).get(TaskViewModel.class);
+        mWordViewModel.getAllTasks().observe((FragmentActivity)context, new Observer<List<MutableTaskImpl>>() {
+            @Override
+            public void onChanged(@Nullable final List<MutableTaskImpl> words) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setTasks(words);
+            }
+        });
         adapter.setListener(new TaskClickListener(){
 
             @Override
@@ -125,6 +138,6 @@ public class TasksView extends RecyclerView {
     }
 
     public List<Task> getTasks() {
-        return adapter.getTasks();
+        return (List<Task>)adapter.getTasks();
     }
 }

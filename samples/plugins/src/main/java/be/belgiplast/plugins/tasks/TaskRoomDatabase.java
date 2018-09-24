@@ -1,9 +1,12 @@
 package be.belgiplast.plugins.tasks;
 
+import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 
 @Database(entities = {MutableTaskImpl.class}, version = 1)
 public abstract class TaskRoomDatabase extends RoomDatabase {
@@ -39,13 +42,15 @@ public abstract class TaskRoomDatabase extends RoomDatabase {
         private final TaskDao mDao;
 
         PopulateDbAsync(TaskRoomDatabase db) {
-            mDao = db.wordDao();
+            mDao = db.taskDao();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
             MutableTaskImpl word = new MutableTaskImpl();
+            word.setName("new task");
+            word.setDescription("new task");
             mDao.insert(word);
             return null;
         }

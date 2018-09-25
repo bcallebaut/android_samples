@@ -21,7 +21,7 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
 
         tv = (TasksView)findViewById(R.id.testview);
-        tv.getTasks().add(new MutableTaskImpl(R.drawable.ic_add,"blah","blah blah",75));
+        //tv.getTasks().add(new MutableTaskImpl(R.drawable.ic_add,"blah","blah blah",75));
         ImageView iv = findViewById(R.id.imageView2);
         iv.setOnClickListener(new View.OnClickListener() {
             @Override

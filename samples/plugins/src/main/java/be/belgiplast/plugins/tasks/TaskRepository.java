@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
-public class TaskRepository {
+import be.belgiplast.plugins.CRUDInterface;
+
+public class TaskRepository implements CRUDInterface<MutableTaskImpl> {
     private TaskDao mTaskDao;
     private LiveData<List<MutableTaskImpl>> mAllTasks;
 
@@ -18,6 +20,14 @@ public class TaskRepository {
 
     public void insert (MutableTaskImpl word) {
         new insertAsyncTask(mTaskDao).execute(word);
+    }
+
+    public void update (MutableTaskImpl word) {
+        new updateAsyncTask(mTaskDao).execute(word);
+    }
+
+    public void delete (MutableTaskImpl word) {
+        new deleteAsyncTask(mTaskDao).execute(word);
     }
 
     public LiveData<List<MutableTaskImpl>> getAllTasks() {
@@ -35,6 +45,36 @@ public class TaskRepository {
         @Override
         protected Void doInBackground(final MutableTaskImpl... params) {
             mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    private static class updateAsyncTask extends AsyncTask<MutableTaskImpl, Void, Void> {
+
+        private TaskDao mAsyncTaskDao;
+
+        updateAsyncTask(TaskDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final MutableTaskImpl... params) {
+            mAsyncTaskDao.update(params[0]);
+            return null;
+        }
+    }
+
+    private static class deleteAsyncTask extends AsyncTask<MutableTaskImpl, Void, Void> {
+
+        private TaskDao mAsyncTaskDao;
+
+        deleteAsyncTask(TaskDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final MutableTaskImpl... params) {
+            mAsyncTaskDao.delete(params[0]);
             return null;
         }
     }

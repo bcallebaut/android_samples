@@ -1,5 +1,6 @@
 package be.belgiplast.plugins.tasks;
 
+import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,21 +10,28 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.belgiplast.plugins.CRUDInterface;
 import be.belgiplast.plugins.PluginSettingsHolder;
 import be.belgiplast.plugins.R;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements TaskClickListener{
 
-    private List<Task> tasks = new ArrayList<>();
+    private LiveData<List<MutableTaskImpl>> tasks;
     private TaskClickListener listener;
     private TaskEditor editor;
     private TaskView view;
+    private TaskViewModel src;
 
     public TaskAdapter() {
     }
 
+    public TaskAdapter(TaskViewModel src) {
+        this.src = src;
+        tasks = src.getAllTasks();
+    }
+
     public List<? extends Task> getTasks() {
-        return tasks;
+        return tasks.getValue();
     }
 
     public final TaskClickListener getListener() {
@@ -35,49 +43,25 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
     }
 
     public int indexOf(Object o) {
-        return tasks.indexOf(o);
+        return getTasks().indexOf(o);
     }
 
-    public void addTask(MutableTask task){
-        tasks.add((Task)task);
-        int index = tasks.indexOf(task);
+    public void addTask(MutableTaskImpl task){
+        src.insert(task);
+        int index = indexOf(task);
         notifyItemInserted(index);
     }
 
-    public void removeTask(MutableTask task){
-        int index = tasks.indexOf(task);
-        tasks.remove(task);
+    public void removeTask(MutableTaskImpl task){
+        int index = indexOf(task);
+        src.delete(task);
         notifyItemRemoved(index);
     }
 
-    public void setTasks(List<? extends Task> tasks) {
-        this.tasks.clear();
-        this.tasks.addAll(tasks);
-        /*
-        if (tasks instanceof MutableList){
-            try{
-                ((MutableList<Task>)tasks).setListener(new MutableListListener<Task>() {
-                    @Override
-                    public void itemAdded(Task item, int position) {
-                        //TaskAdapter.this.tasks
-                    }
-
-                    @Override
-                    public void itemRemoved(Task item, int position) {
-
-                    }
-
-                    @Override
-                    public void itemMoved(Task item, int position, int target) {
-
-                    }
-                });
-            }catch (Exception e){
-
-            }
-        }
-        */
-    }
+//    public void setTasks(List<? extends Task> tasks) {
+//        this.tasks.clear();
+//        this.tasks.addAll(tasks);
+//    }
 
     @Override
     public void onBindViewHolder(@NonNull TaskHolder holder, int position, @NonNull List<Object> payloads) {
@@ -102,13 +86,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
 
     @Override
     public void onBindViewHolder(@NonNull TaskHolder taskHolder, int i) {
-        taskHolder.bind((MutableTask)tasks.get(i));
+        taskHolder.bind((MutableTaskImpl)tasks.getValue().get(i));
         taskHolder.setListener(listener);
     }
 
     @Override
     public int getItemCount() {
-        return tasks.size();
+        try{
+            return tasks.getValue().size();
+        }catch (Exception e){
+            return 0;
+
+        }
     }
 
     @Override
@@ -122,6 +111,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
                 editor.setVisibility(View.GONE);
                 view.setName(editor.getName());
                 view.setDescription(editor.getDescription());
+                src.update((MutableTaskImpl)task);
             }
         }catch (Exception e){}
     }

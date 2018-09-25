@@ -20,4 +20,8 @@ public class TaskViewModel extends AndroidViewModel {
     LiveData<List<MutableTaskImpl>> getAllTasks() { return mAllWords; }
 
     public void insert(MutableTaskImpl word) { mRepository.insert(word); }
+
+    public void update(MutableTaskImpl word) { mRepository.update(word); }
+
+    public void delete(MutableTaskImpl word) { mRepository.delete(word); }
 }

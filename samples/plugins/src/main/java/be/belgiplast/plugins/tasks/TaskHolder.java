@@ -13,6 +13,7 @@ class TaskHolder extends RecyclerView.ViewHolder implements TaskPartClickListene
     private TaskEditor editor;
     private TaskProgressEditor progress;
     private TaskClickListener listener;
+    private MutableTaskImpl task;
 
     public TaskHolder(@NonNull View itemView) {
         super(itemView);
@@ -31,7 +32,8 @@ class TaskHolder extends RecyclerView.ViewHolder implements TaskPartClickListene
         this.listener = listener;
     }
 
-    public final void bind(MutableTask data){
+    public final void bind(MutableTaskImpl data){
+        this.task = data;
         view.bind(data);
         view.setListener(this);
     }
@@ -47,6 +49,7 @@ class TaskHolder extends RecyclerView.ViewHolder implements TaskPartClickListene
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
         progress.setVisibility(View.GONE);
+        listener.onTaskClicked(task);
     }
 
     @Override
@@ -58,10 +61,11 @@ class TaskHolder extends RecyclerView.ViewHolder implements TaskPartClickListene
             view.setProgress(progress.getProgress());
         }
         editor.setVisibility(View.GONE);
+        listener.onTaskClicked(task);
     }
 
     @Override
     public void iconClicked(boolean visible) {
-
+        listener.onTaskClicked(task);
     }
 }

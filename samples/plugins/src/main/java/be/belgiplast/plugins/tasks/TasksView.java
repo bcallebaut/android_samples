@@ -19,6 +19,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -41,8 +42,9 @@ public class TasksView extends RecyclerView {
 
     public TasksView(final Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        adapter = new TaskAdapter();
+
         mWordViewModel = ViewModelProviders.of((FragmentActivity)context).get(TaskViewModel.class);
+        /*
         mWordViewModel.getAllTasks().observe((FragmentActivity)context, new Observer<List<MutableTaskImpl>>() {
             @Override
             public void onChanged(@Nullable final List<MutableTaskImpl> words) {
@@ -50,6 +52,8 @@ public class TasksView extends RecyclerView {
                 adapter.setTasks(words);
             }
         });
+        */
+        adapter = new TaskAdapter(mWordViewModel);
         adapter.setListener(new TaskClickListener(){
 
             @Override
@@ -110,14 +114,12 @@ public class TasksView extends RecyclerView {
         setAdapter(adapter);
     }
 
-    public void addTask(MutableTask task) {
+    public void addTask(MutableTaskImpl task) {
         adapter.addTask(task);
-        this.invalidate();
     }
 
-    public void removeTask(MutableTask task) {
+    public void removeTask(MutableTaskImpl task) {
         adapter.removeTask(task);
-        this.invalidate();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -134,6 +136,16 @@ public class TasksView extends RecyclerView {
             }catch (ClassCastException cce){
                 cce.printStackTrace();
             }
+        }
+        if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            MutableTaskImpl word = new MutableTaskImpl();
+            word.setName(data.getStringExtra("blah"));
+            mWordViewModel.insert(word);
+        } else {
+            Toast.makeText(
+                    getContext().getApplicationContext(),
+                    "not saved",
+                    Toast.LENGTH_LONG).show();
         }
     }
 

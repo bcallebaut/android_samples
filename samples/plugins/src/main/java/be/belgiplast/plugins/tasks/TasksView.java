@@ -58,7 +58,7 @@ public class TasksView extends RecyclerView {
 
             @Override
             public void onTaskClicked(Task task) {
-                int requestCode = adapter.indexOf(task);
+                int requestCode = adapter.indexOf((MutableTaskImpl)task);
 
                 final TaskEditDialog dialog = new TaskEditDialog(context);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

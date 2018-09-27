@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import be.belgiplast.plugins.CRUDInterface;
@@ -28,9 +29,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
     public TaskAdapter(TaskViewModel src) {
         this.src = src;
         tasks = src.getAllTasks();
+
     }
 
     public List<? extends Task> getTasks() {
+        if (tasks.getValue() == null){
+            return Collections.EMPTY_LIST;
+        }
         return tasks.getValue();
     }
 
@@ -42,13 +47,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Tas
         this.listener = listener;
     }
 
-    public int indexOf(Object o) {
-        return getTasks().indexOf(o);
+    public int indexOf(MutableTaskImpl o) {
+        //return getTasks().indexOf(o);
+        return o.getId();
     }
 
     public void addTask(MutableTaskImpl task){
         src.insert(task);
-        int index = indexOf(task);
+        int index = task.getId();//indexOf(task);
         notifyItemInserted(index);
     }
 

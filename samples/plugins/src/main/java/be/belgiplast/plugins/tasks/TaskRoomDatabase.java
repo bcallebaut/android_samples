@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {MutableTaskImpl.class}, version = 1)
+@Database(entities = {MutableTaskImpl.class}, version = 2)
 public abstract class TaskRoomDatabase extends RoomDatabase {
     private static volatile TaskRoomDatabase INSTANCE;
 

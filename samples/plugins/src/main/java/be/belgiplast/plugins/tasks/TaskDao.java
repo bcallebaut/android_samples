@@ -37,4 +37,7 @@ public interface TaskDao extends CRUDInterface<MutableTaskImpl> {
 
     @Query("SELECT * from task WHERE task.progress = 0 ORDER BY id ASC")
     LiveData<List<MutableTaskImpl>> getNewTasks();
+
+    @Query("SELECT * from task WHERE task.id>=:start AND task.id <=:end ORDER BY id ASC")
+    LiveData<List<MutableTaskImpl>> getTaskRange(int start, int end);
 }

@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.android.volley.toolbox.JsonObjectRequest;
+
 import be.belgiplast.plugins.tasks.MutableTask;
 import be.belgiplast.plugins.tasks.MutableTaskImpl;
 import be.belgiplast.plugins.tasks.Task;
@@ -30,8 +32,13 @@ public class TestActivity extends AppCompatActivity {
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv.addTask(new MutableTaskImpl());
-                new LoadTasks().execute(TestActivity.this);
+                //tv.addTask(new MutableTaskImpl());
+                //new LoadTasks().execute(TestActivity.this);
+                MutableTaskImpl tsk = new MutableTaskImpl();
+                tsk.setName("foo");
+                tsk.setDescription("bar");
+                JsonObjectRequest req = ((PluginsApplication)getApplication()).getTaskOperations().getAddTask(tsk);
+                ((PluginsApplication)getApplication()).getRequestQueue().add(req);
             }
         });
         if (ContextCompat.checkSelfPermission(this,

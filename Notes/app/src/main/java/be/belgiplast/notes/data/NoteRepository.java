@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
+import java.util.Date;
 import java.util.List;
 
 import be.belgiplast.notes.api.ErrorListener;
@@ -37,6 +38,21 @@ public class NoteRepository {
         requestAndSaveData(query);
         LiveData<List<Note>> data = cache.reposById(query);
         return new NoteSearchResult(data, networkErrors);
+    }
+
+    public void createNote(String name,String description){
+        final Note note = new Note();
+        note.setName(name);
+        note.setDescription(description);
+        note.setTimestamp(new Date());
+        note.setModification(note.getTimestamp());
+        note.setId(note.hashCode());
+        cache.insert(note, new CacheListener() {
+            @Override
+            public void insertFinished() {
+                service.createNote(name,description);
+            }
+        });
     }
 
     public void requestMore(long query){

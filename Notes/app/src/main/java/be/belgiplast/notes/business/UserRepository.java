@@ -12,6 +12,8 @@ import java.util.concurrent.Executors;
 
 import javax.inject.Singleton;
 
+import be.belgiplast.notes.db.NoteDao;
+import be.belgiplast.notes.db.NoteDatabase;
 import be.belgiplast.notes.network.Controller;
 
 @Singleton
@@ -26,7 +28,7 @@ public class UserRepository {
 
     public UserRepository(Context context) {
         this.webservice = new Controller(this);
-        this.noteDao = NoteRoomDatabase.getDatabase(context).noteDao();
+        this.noteDao = NoteDatabase.getDatabase(context).noteDao();
         this.webservice.start();
         this.executor = Executors.newCachedThreadPool();
     }

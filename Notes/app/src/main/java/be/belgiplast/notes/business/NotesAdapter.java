@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import be.belgiplast.notes.R;
+import be.belgiplast.notes2.R;
 
 public class NotesAdapter extends RecyclerView.Adapter<NoteHolder> {
     private UserRepository repo;

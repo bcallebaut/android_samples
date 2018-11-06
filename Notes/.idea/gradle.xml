@@ -9,6 +9,7 @@
           <set>
             <option value="/mnt/sdc1/home/benoit/git/benoit/android/android_samples/Notes" />
             <option value="/mnt/sdc1/home/benoit/git/benoit/android/android_samples/Notes/app" />
+            <option value="/mnt/sdc1/home/benoit/git/benoit/android/android_samples/Notes/notes2" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

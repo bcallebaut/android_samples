@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Notes</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_add_note">AddNoteActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="no_results">No results 😓</string>
+    <string name="search_hint">Search</string>
+    <string name="facebook_app_id">287492378761986</string>
+    <string name="fb_login_protocol_scheme">fb287492378761986</string>
 </resources>

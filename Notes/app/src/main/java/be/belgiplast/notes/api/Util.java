@@ -23,9 +23,7 @@ public class Util {
             final ErrorListener onError) {
         Log.d(TAG, "query: $query, page: $page, itemsPerPage: $itemsPerPage");
 
-        String apiQuery = query + IN_QUALIFIER;
-
-        service.searchRepos(apiQuery, page, itemsPerPage).enqueue(
+        service.searchNotes(query, page, itemsPerPage).enqueue(
                 new Callback<NoteSearchResponse>() {
                     public void onFailure(Call<NoteSearchResponse> call, Throwable t) {
                         Log.d(TAG, "fail to get data");

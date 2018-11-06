@@ -43,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         initAdapter();
         String query = DEFAULT_QUERY;
-        try {
-            query = savedInstanceState.getString(LAST_SEARCH_QUERY) != null ? savedInstanceState.getString(LAST_SEARCH_QUERY) : DEFAULT_QUERY;
-        }catch (Exception e){}
+        query = savedInstanceState.getString(LAST_SEARCH_QUERY) != null ? savedInstanceState.getString(LAST_SEARCH_QUERY) : DEFAULT_QUERY;
         viewModel.searchRepo(query);
         initSearch(query);
     }
